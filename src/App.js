@@ -298,23 +298,54 @@ function App() {
     setFormIsSubmited(true)
   }
 
-  const validate = (event, reg, setIsShowed) => {
-    if (reg.toString() === '/^[0-9]+$/') {
-      if (reg.test(event.target.value)) {
-        if (setIsShowed) {
-          setIsShowed(true)
-        }
-      } else {
-        alert('Use only numbers')
+  // const validate = (event, reg, setIsShowed) => {
+  //   if (reg.toString() === '/^[0-9]+$/') {
+  //     if (reg.test(event.target.value)) {
+  //       if (setIsShowed) {
+  //         setIsShowed(true)
+  //       }
+  //     } else {
+  //       alert('Use only numbers')
+  //     }
+  //   } else if (reg.toString() === '/^[а-яА-ЯёЁa-zA-Z]+$/') {
+  //     if (reg.test(event.target.value)) {
+  //       if (setIsShowed) {
+  //         setIsShowed(true)
+  //       }
+  //     } else {
+  //       alert('Use only letters')
+  //     }
+  //   }
+  // }
+
+
+  const validateRegNumber = (event, reg, setIsShowed) => {
+    // if (reg.toString() === '/^[а-яА-ЯёЁa-zA-Z]+$/') {
+    //     if (reg.test(event.target.value)) {
+    //         if (setIsShowed) {
+    //             setIsShowed(true)
+    //         }
+    //     } else {
+    //         alert('Use only letters')
+    //     }
+    // } else if (reg.toString() === '/^[0-9]+$/') {
+    if (reg.test(event.target.value)) {
+      if (setIsShowed) {
+        setIsShowed(true)
       }
-    } else if (reg.toString() === '/^[а-яА-ЯёЁa-zA-Z]+$/') {
-      if (reg.test(event.target.value)) {
-        if (setIsShowed) {
-          setIsShowed(true)
-        }
-      } else {
-        alert('Use only letters')
+    } else {
+      alert('Use only numbers')
+    }
+    // }
+  }
+
+  const validateRegLetters = (event, reg, setIsShowed) => {
+    if (reg.test(event.target.value)) {
+      if (setIsShowed) {
+        setIsShowed(true)
       }
+    } else {
+      alert('Use only numbers')
     }
   }
 
@@ -350,7 +381,7 @@ function App() {
             </DivSelect>
             <DivYearOfEnding>
               <input type={'text'} required minLength={'4'} maxLength={'4'}
-                     onChange={event => validate(event, /^[0-9]+$/)}/>
+                     onChange={event => validateRegNumber(event, /^[0-9]+$/)}/>
             </DivYearOfEnding>
           </div>
           <DivInputSearch>
@@ -375,20 +406,20 @@ function App() {
           <div style={{display: 'flex'}}>
             {inputDiplomaSeries ? <div style={{marginRight: '30px'}}>
               <input type={'text'} required placeholder={'Серия диплома'}
-                     onChange={(event) => validate(event, /^[0-9]+$/, setInputDiplomaNumber)}/>
+                     onChange={(event) => validateRegNumber(event, /^[0-9]+$/, setInputDiplomaNumber)}/>
             </div> : null}
             {inputDiplomaNumber ? <div>
               <input type={'text'} required placeholder={'Номер диплома'}
-                     onChange={(event) => validate(event, /^[0-9]+$/, setInputSpeciality)}/>
+                     onChange={(event) => validateRegNumber(event, /^[0-9]+$/, setInputSpeciality)}/>
             </div> : null}
           </div>
           {inputSpeciality ? <div>
             <input type={'text'} required placeholder={'Специальность по диплому'} style={{width: '830px'}}
-                   onChange={(event) => validate(event, /^[а-яА-ЯёЁa-zA-Z]+$/, setInputQualification)}/>
+                   onChange={(event) => validateRegLetters(event, /^[а-яА-ЯёЁa-zA-Z]+$/, setInputQualification)}/>
           </div> : null}
           {inputQualification ? <div>
             <input type={'text'} required placeholder={'Квалификация по диплому'} style={{width: '830px'}}
-                   onChange={(event) => validate(event, /^[а-яА-ЯёЁa-zA-Z]+$/)}/>
+                   onChange={(event) => validateRegLetters(event, /^[а-яА-ЯёЁa-zA-Z]+$/)}/>
           </div> : null}
           <DivCheckbox>
             <input type={'checkbox'} id={'Checkbox'}/>
@@ -410,13 +441,13 @@ function App() {
                 <p>Поля обязательные для заполнения</p>
               </div>
             </DivButton>
-            {/*<DivButton>*/}
-            {/*  <button>Отмена</button>*/}
-            {/*  <div>*/}
-            {/*    <img src={requiredIcon} alt={'requiredIcon'}/>*/}
-            {/*    <p>Поля обязательные для заполнения</p>*/}
-            {/*  </div>*/}
-            {/*</DivButton>*/}
+            <DivButton>
+              <button>Отмена</button>
+              <div>
+                <img src={requiredIcon} alt={'requiredIcon'}/>
+                <p>Поля обязательные для заполнения</p>
+              </div>
+            </DivButton>
           </div>}
         </FormWrapper>
         {info ? info.map(i => <div>
