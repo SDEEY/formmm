@@ -410,13 +410,13 @@ function App() {
                 <p>Поля обязательные для заполнения</p>
               </div>
             </DivButton>
-            <DivButton>
-              <button>Отмена</button>
-              <div>
-                <img src={requiredIcon} alt={'requiredIcon'}/>
-                <p>Поля обязательные для заполнения</p>
-              </div>
-            </DivButton>
+            {/*<DivButton>*/}
+            {/*  <button>Отмена</button>*/}
+            {/*  <div>*/}
+            {/*    <img src={requiredIcon} alt={'requiredIcon'}/>*/}
+            {/*    <p>Поля обязательные для заполнения</p>*/}
+            {/*  </div>*/}
+            {/*</DivButton>*/}
           </div>}
         </FormWrapper>
         {info ? info.map(i => <div>
